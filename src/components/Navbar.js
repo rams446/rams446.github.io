@@ -1,23 +1,25 @@
 import { Link } from "react-router-dom"
+import Paidebooks from "../pages/Paidebooks"
 export default function Navbar(){
     return(
-        <div>
+        <div className="nav">
+         
             <Link to="/">
-            <div>Home</div>
+            <div className="item">Home</div>
             </Link>
-            <Link to="/fiction">
-             <div>Fiction</div>
+            <Link to="/ebooks">
+             <div className="item">Ebooks</div>
             </Link>
-            <Link to="/nonfiction">
-             <div>Non-fiction</div>
+            <Link to="/freeebooks">
+             <div className="item">Free-Ebooks</div>
             </Link>
-            <Link to="/education">
-             <div>Education</div>
+            <Link to="/paidebooks">
+             <div className="item">Paid-Ebooks</div>
             </Link>
-            <Link to="/health">
-             <div>Health</div>
+            <Link to="/partial">
+             <div className="item">Partial</div>
             </Link>
-
+            
         </div>
     )
 }
