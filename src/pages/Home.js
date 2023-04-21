@@ -27,7 +27,8 @@ useEffect(()=>{
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(bookSearch.searchterm)
-      getbook(bookSearch.searchterm)
+      if(bookSearch.searchterm!== undefined)
+        getbook(bookSearch.searchterm);
     }
     return(
 

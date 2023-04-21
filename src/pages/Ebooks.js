@@ -19,10 +19,13 @@ export default function Ebooks(props){
       setBooksearch(data)
     }catch(e){console.error(e)}
   };
+  // Whenevever the user provide the value the onchage function invokes and set the value to setBookserch 
+   
     const handleChange = (event) => {
         setBooksearch({ ...bookSearch, [event.target.name]: event.target.value });
         console.log(bookSearch.searchterm)
     };
+     //Once we clicked the button the search  getbook function invokes and we will get the rsponse from api and page will render
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(bookSearch.searchterm)
