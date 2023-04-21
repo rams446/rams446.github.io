@@ -9,8 +9,7 @@ export default function Home(props){
     const apiKey="AIzaSyB4wJL3EjIUk3PzosN6cXK_SMn6jlrwU7M";
       const getbook=async(searchterm)=>{
     try{
-      const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&key=${apiKey}`);
-     
+      const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&key=${apiKey}`)
       const data=await response.json();
       setBooksearch(data)
     }catch(e){console.error(e)}
@@ -19,7 +18,6 @@ export default function Home(props){
 useEffect(()=>{
   },[]);
   
-   
     const handleChange = (event) => {
         setBooksearch({ ...bookSearch, [event.target.name]: event.target.value });
         console.log(bookSearch.searchterm)
@@ -31,10 +29,8 @@ useEffect(()=>{
         getbook(bookSearch.searchterm);
     }
     return(
-
-        
-        <div >
-             <h1 class="searchBook">Search the Book</h1>
+    <div>
+            <h1 class="searchBook">Search the Book</h1>
         <form onSubmit={handleSubmit}>
         <input className='input-search'
           type="text"
@@ -46,6 +42,5 @@ useEffect(()=>{
         </form>
         <Homedisplay Book={bookSearch} />
     </div>
-    )
-    
+    )  
 }

@@ -14,16 +14,13 @@ export default function Paidebooks(props){
       const getbook=async(searchterm)=>{
     try{
       const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=paid-ebooks&key=${apiKey}`);
-     
       const data=await response.json();
       setBooksearch(data)
     }catch(e){console.error(e)}
-  };
-   
+  };  
 useEffect(()=>{
   },[]);
-  
-   
+    
     const handleChange = (event) => {
         setBooksearch({ ...bookSearch, [event.target.name]: event.target.value });
         console.log(bookSearch.searchterm)
@@ -34,11 +31,9 @@ useEffect(()=>{
         if(bookSearch.searchterm!== undefined)
         getbook(bookSearch.searchterm);
     }
-    return(
-
-        
+    return(       
         <div>
-         <h1 class="searchBook">Search the Book</h1>
+        <h1 class="searchBook">Search the Book</h1>
         <form onSubmit={handleSubmit}>
         <input className='input-search'
           type="text"
@@ -49,9 +44,7 @@ useEffect(()=>{
         <button name="Book Search" onSubmit={handleSubmit} ><FaSistrix/></button>
         </form>
         <Paidebooksdisplay Book={bookSearch} />
-        < StaffPicked Booktype="paid-ebooks"/>
-         
-            
+        < StaffPicked Booktype="paid-ebooks"/>                
     </div>
     )
     
