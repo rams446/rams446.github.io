@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import Paidebooks from "../pages/Paidebooks"
 export default function Navbar(){
     return(
         <div className="nav">
@@ -16,7 +15,12 @@ export default function Navbar(){
             <Link to="/paidebooks">
              <div className="item">Paid-Ebooks</div>
             </Link>
-            
+            <Link to="/partial">
+             <div className="item">Partial</div>
+            </Link>
+            <Link to="/full">
+             <div className="item">Full</div>
+            </Link>
             
         </div>
     )

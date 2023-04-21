@@ -1,22 +1,59 @@
 import StaffPicked from "../components/Staffpicked";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Freeebooksdisplay from "./Freeebooksdisplay";
+import {FaSistrix} from "react-icons/fa"
+
+
 export default function Freeebooks(props){
-    return (
-        <div>
-        <div className="cards">
-            {props.freeEbook !== null && props.freeEbook !== undefined?props.freeEbook.items!== null?props.freeEbook.items.map((item, index) => {
-                 return (  
-                 <div className="card">
-                    <img src={item.volumeInfo.imageLinks.thumbnail } alt="image"></img><br/>
-                    <Link class="word-wrap"  to={ `/Freeebooks/${item.volumeInfo.title}`
-                    } > {item.volumeInfo.title}</Link>  
-                    <br/>
-                    
-                 </div>
-             ) }
-            ):"":""}
-        </div>
-        <StaffPicked Booktype="free-ebooks"/>
-        </div>
-    )
+
+    const [bookSearch, setBooksearch]=useState({
+        searchterm: ""
+    })
+    //const apiKey="AIzaSyCEpE36cwIYwvnKjk-xDm3ptkaKoP7oASE";
+    const apiKey="AIzaSyB4wJL3EjIUk3PzosN6cXK_SMn6jlrwU7M";
+      const getbook=async(searchterm)=>{
+    try{
+      const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=free-ebooks&key=${apiKey}`);
+     
+      const data=await response.json();
+      setBooksearch(data)
+    }catch(e){console.error(e)}
+  };
+  // Whenevever the user provide the value the onchage function invokes and set the value to setBookserch 
+   
+    const handleChange = (event) => {
+        setBooksearch({ ...bookSearch, [event.target.name]: event.target.value });
+        console.log(bookSearch.searchterm)
+    };
+     //Once we clicked the button the search  getbook function invokes and we will get the rsponse from api and page will render
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(bookSearch.searchterm)
+        if(bookSearch.searchterm!== undefined)
+        getbook(bookSearch.searchterm);
+    }
+    return(
+   
+      <div>
+        
+        <h1 class="searchBook">Search the Book</h1>
+      <form onSubmit={handleSubmit}>
+     
+       <input 
+       
+          type="text"
+          name="searchterm"
+          value={bookSearch.searchterm} onChange={handleChange}
+          placeholder="Search"
+          
+        />  
+         <button name="Book Search" onSubmit={handleSubmit}> <FaSistrix/></button>
+       
+        </form> 
+        <Freeebooksdisplay Book={bookSearch}/>
+        < StaffPicked Booktype="free-ebooks"/>   
+      </div>
+  
+          )  
+    
 }

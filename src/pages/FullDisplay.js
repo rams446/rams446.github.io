@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom"
-export default function Partialbookdisplay(props){
+export default function FullDisplay(props){
     const {symbol}=useParams()
     return (
         <div className="cards center">
-       { props.Partial !== null?props.Partial.items.map((item) => {
+       { props.Full !== null?props.Full.items.map((item) => {
             return (item.volumeInfo.title ===symbol?
              <div  className="card">
                 <img src={item.volumeInfo.imageLinks.thumbnail } alt="image"></img>

@@ -51,7 +51,7 @@ export default function Ebooks(props){
        
         </form> 
         <Ebooksdisplay Book={bookSearch}/>
-        < StaffPicked Booktype="free-ebooks"/>   
+        < StaffPicked Booktype="ebooks"/>   
       </div>
   
           )  

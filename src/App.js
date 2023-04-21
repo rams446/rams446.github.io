@@ -11,6 +11,10 @@ import Freeebooksdisplay from './pages/Freeebooksdisplay'
 import Paidebooks from './pages/Paidebooks';
 import './logo.webp'
 import Footer from './components/Footer';
+import Partial from './pages/Partial';
+import Partialbookdisplay from './pages/PartialbookDisplay';
+import Full from './pages/Full';
+import FullDisplay from './pages/FullDisplay';
 
 
 function App() {
@@ -19,15 +23,8 @@ function App() {
   const [freeebooks,setFreeebooks]=useState(null)
   const [ebooks,setEbooks]=useState(null)
   const [paidebooks,setPaidebooks]=useState(null)
-  // const getbook=async(searchTerm)=>{
-  //   try{
-  //     const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}`);
-     
-  //     const data=await response.json();
-  //     setBook(data)
-  //   }catch(e){console.error(e)}
-  // };
-  
+  const [partial,setPartial]=useState(null)
+  const [full,setFull]=useState(null)
   const fetchData =  (searchterm) => {
     try {
       //const apiKey="AIzaSyCEpE36cwIYwvnKjk-xDm3ptkaKoP7oASE";
@@ -36,25 +33,26 @@ function App() {
       const apiCallfreeebooks =fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=free-ebooks&maxResults=20&key=${apiKey}`);
       const apiCallebooks =fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=ebooks&maxResults=20&key=${apiKey}`);
       const apiCallpaidebooks =fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=paid-ebooks&maxResults=20&key=${apiKey}`);
-    
+      const apiCallPartial =fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=partial&maxResults=20&key=${apiKey}`);
+      const apiCallfull =fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=full&maxResults=20&key=${apiKey}`);
       const response =  Promise.all([
         apiCallbook,
         apiCallfreeebooks,
         apiCallebooks,
         apiCallpaidebooks,
+        apiCallPartial,
+        apiCallfull
       ]).then(responses => {
          return Promise.all(responses.map(r=> r.json()));
-      }).then(([book, freeBook, ebook, paidEbook])=>{
-        // console.log(book);
-        console.log(freeBook);
-        console.log(ebook);
-        console.log(paidEbook);
+      }).then(([book, freeBook, ebook, paidEbook,partial,full])=>{
        
-        // setBook(book)  
+  
         setBook(book)   
         setFreeebooks(freeBook)    
         setEbooks(ebook)
         setPaidebooks(paidEbook)
+        setPartial(partial)
+        setFull(full)
       }
         );
     } catch {
@@ -76,6 +74,10 @@ useEffect(()=>{
          <Route path='/freeebooks/:symbol' element={<Freeebooksdisplay freeEbook={freeebooks}/>}/>
          <Route path='/ebooks' element={<Ebooks   Ebooks={Ebooks}/>}/> 
          <Route path='/paidebooks' element={<Paidebooks Paidebooks={paidebooks}/>}/>
+         <Route path='/partial' element={<Partial Partial={partial}/>}/>
+         <Route path='/partial/:symbol' element={<Partialbookdisplay Partial={partial}/>}/>
+         <Route path='/full' element={<Full Full={full}/>}/>
+         <Route path='/full/:symbol' element={<FullDisplay Full={full}/>}/>
       </Routes>
       </div>
       <br/>
