@@ -8,7 +8,7 @@
     position: relative;
     z-index: 1;
     padding: 20px;
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
     border-bottom: 1px solid #eee;
 }
@@ -17,11 +17,11 @@
     cursor: pointer;
     transition: color .10s ease-out;
     text-decoration: none;
-   font:bolder;
+    font:bolder;
     color: rgb(33, 5, 46);
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 18px;
     margin: 8px 0;
    
   
@@ -34,7 +34,7 @@ form{
   input{
     width: 40%;
     border-radius: 25px;
-    font-size: 35px;
+    font-size: 30px;
     padding: 8px 40px 8px 20px;
     border: none;
     box-shadow: 0 9px 9px 3px black
