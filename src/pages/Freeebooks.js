@@ -1,21 +1,22 @@
 import StaffPicked from "../components/Staffpicked";
-
 import { Link } from "react-router-dom";
 export default function Freeebooks(props){
-    console.log(props);
     return (
         <div>
-            {props.freeEbook !== null?props.freeEbook.items.map((item, index) => {
-                 return (  <div>
+        <div className="cards">
+            {props.freeEbook !== null && props.freeEbook !== undefined?props.freeEbook.items!== null?props.freeEbook.items.map((item, index) => {
+                 return (  
+                 <div className="card">
                     <img src={item.volumeInfo.imageLinks.thumbnail } alt="image"></img><br/>
-                 <Link to={ `/Freeebooks/${item.volumeInfo.title}`
+                    <Link class="word-wrap"  to={ `/Freeebooks/${item.volumeInfo.title}`
                     } > {item.volumeInfo.title}</Link>  
-                <br/>
+                    <br/>
                     
                  </div>
              ) }
-            ):""}
-            < StaffPicked Booktype="free-ebooks"/>
+            ):"":""}
+        </div>
+        <StaffPicked Booktype="free-ebooks"/>
         </div>
     )
 }

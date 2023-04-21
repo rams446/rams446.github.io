@@ -1,11 +1,12 @@
 export default function Homedisplay(props){
    console.log(props)
     return ( 
-       <div>
+       <div className="cards">
     {
-    <div>{props.Book!== null ? props.Book.items !=null ? 
+    <div className="card">{props.Book!== null ? props.Book.items !=null ? 
         props.Book.items.map(item=>{
-         return( <h2>{item.volumeInfo.title}</h2>)
+         return( <div><h2>{item.volumeInfo.title}</h2>
+         <img src={item.volumeInfo.imageLinks.thumbnail} ></img></div>)
         }):"": ""}</div>
     }
     

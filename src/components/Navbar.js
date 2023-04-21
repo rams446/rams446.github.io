@@ -16,9 +16,7 @@ export default function Navbar(){
             <Link to="/paidebooks">
              <div className="item">Paid-Ebooks</div>
             </Link>
-            <Link to="/partial">
-             <div className="item">Partial</div>
-            </Link>
+            
             
         </div>
     )

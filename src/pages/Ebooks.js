@@ -1,20 +1,56 @@
 import StaffPicked from "../components/Staffpicked";
+import { useState, useEffect } from "react";
+import Ebooksdisplay from "./Ebooksdisplay";
+import {FaSistrix} from "react-icons/fa"
+
 
 export default function Ebooks(props){
-    return (
-        <div>
-            {props.Ebooks !== null?props.Ebooks.items.map((item, index) => {
-                
-                 return (<><h3 key={index}>{item.volumeInfo!== null? item.volumeInfo.title
-                    : ""}</h3>
-                      
-                         <img src={item.volumeInfo!== null? item.volumeInfo.imageLinks.thumbnail :""} alt="image"></img>
-                 </>);
-            }
-            ):""}
-             < StaffPicked Booktype="ebooks"/>
-        </div>
+
+    const [bookSearch, setBooksearch]=useState({
+        searchterm: ""
+    })
+    //const apiKey="AIzaSyCEpE36cwIYwvnKjk-xDm3ptkaKoP7oASE";
+    const apiKey="AIzaSyB4wJL3EjIUk3PzosN6cXK_SMn6jlrwU7M";
+      const getbook=async(searchterm)=>{
+    try{
+      const  response=await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchterm}&filter=ebooks&key=${apiKey}`);
+     
+      const data=await response.json();
+      setBooksearch(data)
+    }catch(e){console.error(e)}
+  };
+    const handleChange = (event) => {
+        setBooksearch({ ...bookSearch, [event.target.name]: event.target.value });
+        console.log(bookSearch.searchterm)
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(bookSearch.searchterm)
+        if(bookSearch.searchterm!== undefined)
+        getbook(bookSearch.searchterm);
+    }
+    return(
+   
+      <div>
         
+        <h1 class="searchBook">Search the Book</h1>
+      <form onSubmit={handleSubmit}>
+     
+       <input 
        
-    )
+          type="text"
+          name="searchterm"
+          value={bookSearch.searchterm} onChange={handleChange}
+          placeholder="Search"
+          
+        />  
+         <button name="Book Search" onSubmit={handleSubmit}> <FaSistrix/></button>
+       
+        </form> 
+        <Ebooksdisplay Book={bookSearch}/>
+        < StaffPicked Booktype="free-ebooks"/>   
+      </div>
+  
+          )  
+    
 }
